@@ -77,10 +77,51 @@ class WPWidgetEmbed
         /* 'embed' variable is set, export any content you like */
         
         if(get_query_var('em_embed') == 'posts')
-        { 
+    { 
+        $allowed_domains = array('site1.com',
+                                 'site2.com',
+                                 'site3.com');
+                                 
+        $calling_host = parse_url(get_query_var('em_domain'));
+        
+        /* Check if the calling domain is in the allowed domains list */
+        if(in_array($calling_host['host'], $allowed_domains))
+        {
             $data_to_embed = $this->export_posts();
             echo $data_to_embed;
         }
+        else
+        {
+            echo "Domain not registered!";
+}
+    }
+    
+    exit();
+}
+
+if(get_query_var('em_embed') == 'posts')
+    { 
+        /* Here we are now using the 'WP Transient API'. 
+           See if we have any saved data for the 'ewidget' key.
+         */
+        $cached = get_transient('ewidget');
+        
+        /* Oops!, the cache is empty */
+        if(empty($cached))
+        {
+            /* Get some fresh data */
+            $data_to_embed = $this->export_posts();
+            
+            /* Save it using the 'WP Transient API' using the 'ewidget' key,
+               set it to expire after 12 hours.
+             */
+            set_transient('ewidget', $data_to_embed, 60 * 60 * 12);
+            echo $data_to_embed;
+        }
+        /* Yes we found some, so we return that to the user */
+        else
+        {
+            echo $cached;
         
         exit();
     }
