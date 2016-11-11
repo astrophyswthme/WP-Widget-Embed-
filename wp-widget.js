@@ -62,10 +62,7 @@ function main()
         var domain = encodeURIComponent(window.document.location);
     
         /* Set 'height' and 'width' according to the content type */
-        var iframeContent = '<iframe style="overflow-y: hidden;" 
-                             height="550" width="400" frameborder="0" 
-                             border="0" cellspacing="0" scrolling="no" 
-                             src="http://www.example.com/?em_embed=' + widget + '&em_domain=' + domain + '"></iframe>';
+        var iframeContent = '<src="http://www.example.com/?em_embed=' + widget + '&em_domain=' + domain + '"></iframe>';
                              
         $("#embed-widget-container").html(iframeContent);
     });
