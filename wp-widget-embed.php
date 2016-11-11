@@ -3,8 +3,8 @@
  * Plugin Name: WordPress Widget Embed
  * Description: Allow people to embed WordPress content in an iframe on other websites
  * Version: 1.0
- * Author: Sameer Borate
- * Author URI: http://www.codediesel.com
+ * Author: Wajiha Rizvi  
+ * Author URI: https://profiles.wordpress.org/wajiharizvi29
  */
 
 class WPWidgetEmbed  
